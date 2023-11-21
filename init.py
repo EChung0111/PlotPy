@@ -209,6 +209,9 @@ You can use --help or --h to see this page. Below you find some information rega
     --linewidth <float>                             Specifies line width for line graphs (Default is linedwidth=3)
     --color <color1,color2,...,colorn>              Specifies colors for graph
 
+    Misc Option
+    --v or --version                                Outputs current code version in the terminal
+
     Data Format Optioms:
     --d <delimiter option>                          Specify delimiter to seperate data entries in data file (Default is whiteshpace)
     --m <singlex or multix>                         Specify if you have one x column or multiple x columns (Default is singlex)
@@ -236,6 +239,7 @@ You can use --help or --h to see this page. Below you find some information rega
     .    .    .    .    .    .   ... .
     x1m  y1m  x2m  y2m  x3m  y3m ... ynm
 
+                
     """
     print(help_message)
 
