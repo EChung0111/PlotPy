@@ -13,7 +13,7 @@ def getfiles(path):
 
 arg_list = sys.argv
 
-if "--help" not in arg_list or "--h" not in arg_list or "--version" not in arg_list or "--v" not in arg_list:
+if ("--help" not in arg_list and "--h" not in arg_list) and ("--version" not in arg_list and "--v" not in arg_list):
 
     if '--wd' in arg_list:
         working_dir = str(arg_list[arg_list.index('--wd')+1])
@@ -189,25 +189,28 @@ This is a command line based graphing software developed by Eugene Chung. This p
 You can use --help or --h to see this page. Below you find some information regarding how to use the program and how to format your data.
 
     Input and Output:
-    --i <input Filename>                             Input file with data to graph (.dat, .csv, etc. You may use unix command line arguments like * and ? to have multiple inputs)
-    --o <Output Filename>                            Output file of graph (Default will have the same name as the inputfile) (.png, .jpg)
-    --wd <Working Directory>                         Working Directory location of input and outfiles (Default is Current Directory)
+    --i <input Filename>                            Input file with data to graph (.dat, .csv, etc. 
+                                                    You may use unix command line arguments like * and ? to have multiple inputs)
+    --o <Output Filename>                           Output file of graph (Default will have the same name as the inputfile) (.png, .jpg)
+    --wd <Working Directory>                        Working Directory location of input and outfiles (Default is Current Directory)
 
     Graphing Options:
-    --g <line>                                  Type of graph to be used       
+    --g <line>                                      Type of graph to be used       
     --title <Graph Title>                           Title for the graph (Default is No Title)
     --xlabel <X Axis Label>                         X axis label for the graph (Default is No Label)
     --ylabel <Y Axis Label>                         Y axis label for the graph (Default is No Label)
     --label <Label1,Label2,Label3,...,Labeln>       Label for the grph (Default is No Label)
     --xrange <xmin,xmax>                            Specify the range of the x axis (Default is automated range selection)
     --yrange <ymin,ymax>                            Specify the range of the y axis (Default is automated range selection)
-    --xticks <X Increment>                          Specify the increment of the tickmarks on the x axis (Default is automated increment selection)
-    --yticks <Y Increment>                          Specify the increment of the tickmarks on the y axis (Default is automated increment selection)
+    --xticks <X Increment>                          Specify the increment of the tickmarks on the x axis
+                                                    (Default is automated increment selection)
+    --yticks <Y Increment>                          Specify the increment of the tickmarks on the y axis
+                                                    (Default is automated increment selection)
     --linewidth <float>                             Specifies line width for line graphs (Default is linedwidth=3)
     --color <color1,color2,...,colorn>              Specifies colors for graph
 
     Data Format Optioms:
-    --d <delimiter option>                  Specify delimiter to seperate data entries in data file (Default is whiteshpace)
+    --d <delimiter option>                          Specify delimiter to seperate data entries in data file (Default is whiteshpace)
     --m <singlex or multix>                         Specify if you have one x column or multiple x columns (Default is singlex)
 
     Data Format Example
