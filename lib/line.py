@@ -113,9 +113,8 @@ class line:
 
             ax.set_title(title)
             fig.tight_layout(pad=2)
-            fig.savefig(os.path.join(outputfile), dpi=1000, bbox_inches="tight")
-            plt.clf()
-            plt.cla()
+
+            return fig, ax
 
         else:
             print("ERROR: INVALID DELIMITER")

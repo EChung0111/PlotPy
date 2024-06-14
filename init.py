@@ -5,6 +5,7 @@ import fnmatch
 import warnings
 import lib.line as line
 import lib.scatter as scatter
+import lib.reaction_coord as reaction_coords
 
 def getfiles(path):
         for file in os.listdir(path):
@@ -148,7 +149,7 @@ if ("--help" not in arg_list and "--h" not in arg_list) and ("--version" not in 
         linewidth_index = sys.argv.index("--linewidth") +1
         linewidth = float(sys.argv[linewidth_index])
     else:
-        linewidth = None
+        linewidth = 1.5
     
     if '--xerr' in arg_list:
         xerr = True
@@ -160,25 +161,47 @@ if ("--help" not in arg_list and "--h" not in arg_list) and ("--version" not in 
     else:
         yerr = False
 
+    if '--plat' in arg_list:
+        plat_len = int(arg_list[arg_list.index('--plat')+1])
+    else:
+        plat_len = None
+
     for in_file,out_file in zip(file_list,out_file_list):
         if graph_type == 'line':
 
             in_file = os.path.join(working_dir,in_file)
             out_file = os.path.join(working_dir,out_file)
 
-            line.line.grapher(datafile=in_file,outputfile=out_file,delimiter=delimiter_str,
+            fig, ax = line.line.grapher(datafile=in_file,outputfile=out_file,delimiter=delimiter_str,
                               title=title_str,xlabel=xlabel_str,ylabel=ylabel_str,
                               label=label_list,xrange=xrange_list,yrange=yrange_list,
                               xticks=xtick_list,yticks=ytick_list,linewidth=linewidth,
                               mode=mode_str,color=color_list)
+
+            fig.savefig(os.path.join(out_file), dpi=1000, bbox_inches="tight")
         
         elif graph_type == 'scatter':
-            scatter.scatter.grapher(datafile=in_file,outputfile=out_file,delimiter=delimiter_str,
+            fig, ax = scatter.scatter.grapher(datafile=in_file,outputfile=out_file,delimiter=delimiter_str,
                                     title=title_str,xlabel=xlabel_str,ylabel=ylabel_str,
                                     label=label_list,xrange=xrange_list,yrange=yrange_list,
                                     xticks=xtick_list,yticks=ytick_list,linewidth=linewidth,
                                     mode=mode_str,xerr=xerr,yerr=yerr)
-            
+
+            fig.savefig(os.path.join(out_file), dpi=1000, bbox_inches="tight")
+
+        elif graph_type == 'rc':
+
+            in_file = os.path.join(working_dir, in_file)
+            out_file = os.path.join(working_dir, out_file)
+
+            fig, ax = reaction_coords.reaction_coord.grapher(datafile=in_file, outputfile=out_file, delimiter=delimiter_str,
+                                        title=title_str, xlabel=xlabel_str, ylabel=ylabel_str,
+                                        label=label_list, xrange=xrange_list, yrange=yrange_list,
+                                        xticks=xtick_list, yticks=ytick_list, linewidth=linewidth,
+                                        mode=mode_str, color=color_list, plat_len=plat_len)
+
+            fig.savefig(os.path.join(out_file), dpi=1000, bbox_inches="tight")
+
         else:
             warnings.warn("Invalid graph type")
 
@@ -195,7 +218,7 @@ You can use --help or --h to see this page. Below you find some information rega
     --wd <Working Directory>                        Working Directory location of input and outfiles (Default is Current Directory)
 
     Graphing Options:
-    --g <line>                                      Type of graph to be used       
+    --g <line, scatter, rc>             Type of graph to be used       
     --title <Graph Title>                           Title for the graph (Default is No Title)
     --xlabel <X Axis Label>                         X axis label for the graph (Default is No Label)
     --ylabel <Y Axis Label>                         Y axis label for the graph (Default is No Label)
@@ -215,6 +238,7 @@ You can use --help or --h to see this page. Below you find some information rega
     Data Format Optioms:
     --d <delimiter option>                          Specify delimiter to seperate data entries in data file (Default is whiteshpace)
     --m <singlex or multix>                         Specify if you have one x column or multiple x columns (Default is singlex)
+    --plat <int>                                    Specify plateau width (Only for reaction Coordinate Plots)
 
     Data Format Example
     This is an example of how you should format your data to graph it.
