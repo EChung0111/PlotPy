@@ -126,10 +126,10 @@ if ("--help" not in arg_list and "--h" not in arg_list) and ("--version" not in 
         xtick_list = None
     
     if '--yrange' in arg_list:
-        xrange_str = str(arg_list[arg_list.index('--yrange')+1])
-        if ',' in xrange_str:
-            yrange_list = xrange_str.split(',')
-            yrange_list = np.array(xrange_list,dtype=float)
+        yrange_str = str(arg_list[arg_list.index('--yrange')+1])
+        if ',' in yrange_str:
+            yrange_list = yrange_str.split(',')
+            yrange_list = np.array(yrange_list,dtype=float)
         else:
             warnings.warn("Need to specify 2 numbers for xrange (xmin,xmax)")
             yrange_list = None
